@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Portable Multi-Biometric Smart Attendance System</title>
+
+<!-- Face API -->
+<script defer src="https://unpkg.com/face-api.js"></script>
+<script defer src="script.js"></script>
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    background: linear-gradient(120deg,#1e3c72,#2a5298);
+    margin:0;
+    color:white;
+}
+header{
+    background:rgba(0,0,0,0.3);
+    padding:20px;
+    text-align:center;
+}
+nav{
+    background:#111;
+    padding:10px;
+    text-align:center;
+}
+nav button{
+    margin:5px;
+    padding:10px 20px;
+    border:none;
+    background:#2a5298;
+    color:white;
+    border-radius:5px;
+    cursor:pointer;
+}
+nav button:hover{background:#1e3c72;}
+.container{
+    max-width:1000px;
+    margin:30px auto;
+    background:white;
+    color:black;
+    padding:25px;
+    border-radius:10px;
+}
+.hidden{display:none;}
+input,select,button{
+    padding:10px;
+    margin:10px 0;
+    width:100%;
+}
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+th,td{
+    padding:10px;
+    border:1px solid #ccc;
+    text-align:center;
+}
+th{
+    background:#2a5298;
+    color:white;
+}
+.success{color:green;font-weight:bold;}
+.card{
+    background:#f5f5f5;
+    padding:20px;
+    border-radius:10px;
+    margin:15px 0;
+}
+video{
+    border:2px solid #2a5298;
+    border-radius:10px;
+}
+.footer{
+    text-align:center;
+    padding:15px;
+    color:#ddd;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>Portable Multi-Biometric Smart Attendance System</h1>
+<p>Embedded Device + Cloud Attendance Portal</p>
+</header>
+
+<nav>
+<button onclick="showPage('home')">Home</button>
+<button onclick="showPage('login')">Staff Login</button>
+<button onclick="showPage('report')">Reports</button>
+<button onclick="showPage('analysis')">Analysis</button>
+</nav>
+
+<!-- HOME -->
+<div class="container" id="home">
+<h2>System Overview</h2>
+<div class="card">
+Uses <b>Face Recognition</b> & <b>Fingerprint Authentication</b>
+to mark attendance securely using a portable device.
+</div>
+</div>
+
+<!-- LOGIN -->
+<div class="container hidden" id="login">
+<h2>Staff Login</h2>
+<input id="staffId" placeholder="Staff ID">
+<input id="staffPass" type="password" placeholder="Password">
+<button onclick="login()">Login</button>
+</div>
+
+<!-- CLASS -->
+<div class="container hidden" id="class">
+<h2>Select Class</h2>
+<select id="classSelect">
+<option value="">-- Select Class --</option>
+<option>CSE-A</option>
+<option>CSE-B</option>
+<option>ECE-A</option>
+</select>
+<button onclick="loadStudents()">Load Students</button>
+</div>
+
+<!-- ATTENDANCE -->
+<div class="container hidden" id="attendance">
+<h2>Attendance Marking</h2>
+
+<video id="video" width="320" height="240" autoplay muted playsinline></video>
+
+<table>
+<thead>
+<tr>
+<th>ID</th><th>Name</th><th>Face</th><th>Fingerprint</th><th>Status</th>
+</tr>
+</thead>
+<tbody id="studentTable"></tbody>
+</table>
+
+<button onclick="showPage('report')">Finish & View Report</button>
+</div>
+
+<!-- REPORT -->
+<div class="container hidden" id="report">
+<h2>Attendance Report</h2>
+<table>
+<thead>
+<tr><th>Student</th><th>Status</th></tr>
+</thead>
+<tbody id="reportTable"></tbody>
+</table>
+</div>
+
+<!-- ANALYSIS -->
+<div class="container hidden" id="analysis">
+<h2>Attendance Analysis</h2>
+<div class="card">
+<p>Total Students: <span id="total"></span></p>
+<p>Present: <span id="present"></span></p>
+<p>Absent: <span id="absent"></span></p>
+</div>
+</div>
+
+<div class="footer">
+© 2025 Smart Attendance System | SE Mini Project
+</div>
+
+</body>
+</html>
